@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charte Graphique — Mondial Relay · Guide Dev Web</title>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@700;800&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* === COULEURS PRIMAIRES === */
+    --color-primary:        #96154A; /* Rose bordeaux — couleur marque principale */
+    --color-primary-dark:   #880D37; /* Rose bordeaux foncé — hover états */
+    --color-primary-light:  #FAF3F6; /* Rose très clair — backgrounds sections */
+
+    /* === COULEURS SECONDAIRES === */
+    --color-violet:         #341661; /* Violet profond — hero B2B, cartes premium */
+    --color-teal:           #4DC1BE; /* Turquoise — accents, notifications info */
+    --color-yellow:         #FBD000; /* Jaune — highlights texte, accents visuels */
+    --color-pink:           #FF5C84; /* Rose vif — badges, liens secondaires */
+
+    /* === COULEURS NEUTRES === */
+    --color-white:          #FFFFFF;
+    --color-black:          #000000;
+    --color-gray-light:     #F5F3F7; /* Backgrounds sections alternées */
+    --color-gray-mid:       #F6F6F4; /* Backgrounds neutres */
+    --color-gray-border:    #DFDEDE; /* Bordures cartes claires */
+    --color-gray-text:      #555555; /* Texte secondaire */
+    --color-gray-subtle:    #868686; /* Texte tertiaire, labels */
+
+    /* === COULEURS SÉMANTIQUES === */
+    --color-success:        #4DC1BE; /* Succès — même que teal */
+    --color-error:          #FF0000; /* Erreurs formulaires */
+    --color-warning:        #FBD000; /* Avertissements */
+
+    /* === PALETTES ROSES (échelle complète) === */
+    --rose-50:   #FFF1F2;
+    --rose-100:  #FDE2F8; /* bg très léger */
+    --rose-200:  rgba(246,171,182,0.4); /* bg léger rose */
+    --rose-300:  #FCCDD4; /* bg cards hover */
+    --rose-400:  #F6ABB6; /* top cards, accents */
+    --rose-500:  #96154A; /* PRIMARY */
+    --rose-900:  #881337; /* dark */
+
+    /* === TYPOGRAPHIE === */
+    --font-title:  'Saira', sans-serif;       /* Titres H1-H4 — Saira Bold */
+    --font-body:   'Archivo', sans-serif;      /* Corps, UI, navigation */
+
+    /* === FONT SIZES === */
+    --text-xs:    11px;
+    --text-sm:    13px;
+    --text-base:  15px;
+    --text-md:    17px;
+    --text-lg:    20px;
+    --text-xl:    23px;
+    --text-2xl:   25px;
+    --text-3xl:   35px;
+    --text-4xl:   40px;
+
+    /* === SPACING (base 8px) === */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-14: 56px;
+
+    /* === BORDER RADIUS === */
+    --radius-sm:   5px;
+    --radius-md:   10px;  /* Standard composants */
+    --radius-lg:   12px;  /* Cards */
+    --radius-xl:   20px;
+    --radius-2xl:  30px;
+    --radius-pill: 50px;  /* Boutons CTA hero */
+    --radius-full: 9999px;
+
+    /* === SHADOWS === */
+    --shadow-sm:   rgba(0,0,0,0.15) 0px 0px 30px 0px;
+    --shadow-md:   rgba(0,0,0,0.15) 0px 0px 40px 0px;
+    --shadow-lg:   rgba(0,0,0,0.2)  0px 0px 18px 0px;
+    --shadow-card: rgba(130,130,130,0.3) 0px 0px 10px 0px;
+
+    /* LAYOUT */
+    --container-max: 1200px;
+    --header-height: 90px;
+  }
+
+  /* ================================================================
+     RESET / BASE
+  ================================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-black);
+    background: var(--color-white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ================================================================
+     GUIDE STYLES (internes à ce doc)
+  ================================================================ */
+  .guide-nav {
+    position: sticky;
+    top: 0;
+    background: var(--color-primary);
+    z-index: 100;
+    padding: 0 var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    height: 56px;
+    box-shadow: var(--shadow-md);
+  }
+  .guide-nav a {
+    font-family: var(--font-body);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .2s;
+  }
+  .guide-nav a:hover { color: var(--color-yellow); }
+  .guide-nav .logo {
+    font-family: var(--font-title);
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    margin-right: auto;
+    white-space: nowrap;
+  }
+
+  .guide-hero {
+    background: var(--color-primary);
+    color: white;
+    padding: 64px var(--space-6) 56px;
+    text-align: center;
+  }
+  .guide-hero h1 {
+    font-family: var(--font-title);
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+  }
+  .guide-hero p {
+    font-size: var(--text-md);
+    opacity: 0.85;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .guide-hero .badge {
+    display: inline-block;
+    background: var(--color-yellow);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: var(--text-xs);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: var(--space-4);
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  .section {
+    padding: 64px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .section:last-child { border-bottom: none; }
+  .section--alt { background: var(--color-gray-light); }
+
+  .section-title {
+    font-family: var(--font-title);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .section-title .anchor-id {
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--color-gray-text);
+    background: var(--color-gray-light);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+  }
+  .section-subtitle {
+    font-size: var(--text-base);
+    color: var(--color-gray-text);
+    margin-bottom: var(--space-8);
+  }
+
+  /* GRILLES */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+
+  /* SWATCH COULEUR */
+  .color-grid { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+  .color-swatch {
+    width: 140px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    background: white;
+  }
+  .color-swatch .swatch-color {
+    height: 80px;
+    width: 100%;
+  }
+  .color-swatch .swatch-info {
+    padding: 10px 12px;
+  }
+  .color-swatch .swatch-name {
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--color-black);
+    margin-bottom: 2px;
+  }
+  .color-swatch .swatch-hex {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--color-gray-text);
+  }
+  .color-swatch .swatch-var {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: var(--color-pink);
+    margin-top: 2px;
+    word-break: break-all;
+  }
+
+  /* CODE BLOCK */
+  .code-block {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin-top: var(--space-4);
+  }
+  .code-block .c-comment { color: #6c7086; }
+  .code-block .c-prop    { color: #89b4fa; }
+  .code-block .c-value   { color: #a6e3a1; }
+  .code-block .c-string  { color: #f9e2af; }
+  .code-block .c-tag     { color: #f38ba8; }
+  .code-block .c-class   { color: #cba6f7; }
+
+  /* TYPO SHOWCASE */
+  .typo-sample {
+    background: white;
+    border: 1px solid var(--color-gray-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-4);
+  }
+  .typo-meta {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-gray-subtle);
+    margin-bottom: var(--space-3);
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+  .typo-meta span {
+    background: var(--color-gray-light);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* BUTTON DEMOS */
+  .btn-showcase {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: center;
+    padding: var(--space-6);
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-gray-border);
+    margin-bottom: var(--space-4);
+  }
+  /* === VRAIS BOUTONS MONDIAL RELAY === */
+  .btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all .2s ease;
+    text-align: center;
+  }
+  .btn-primary {
+    background: var(--color-primary);
+    color: white;
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 15px 22px;
+    font-size: var(--text-base);
+  }
+  .btn-primary:hover { background: var(--color-primary-dark); border-color: var(--color-primary-dark); }
+
+  .btn-outline {
+    background: white;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 15px 22px;
+    font-size: var(--text-base);
+  }
+  .btn-outline:hover { background: var(--rose-50); }
+
+  .btn-cta-hero {
+    background: white;
+    color: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 18px 48px;
+    font-size: var(--text-2xl);
+    font-family: var(--font-body);
+    font-weight: 700;
+    box-shadow: var(--shadow-card);
+  }
+  .btn-cta-hero:hover { transform: scale(1.02); box-shadow: var(--shadow-sm); }
+
+  .btn-violet {
+    background: var(--color-violet);
+    color: white;
+    border-radius: var(--radius-pill);
+    padding: 15px 30px;
+    font-size: var(--text-base);
+  }
+
+  .btn-teal {
+    background: var(--color-teal);
+    color: white;
+    border-radius: var(--radius-md);
+    padding: 12px 24px;
+    font-size: var(--text-base);
+  }
+
+  .btn-sticky {
+    background: white;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 8px 20px;
+    font-size: var(--text-sm);
+  }
+
+  /* COMPONENT CARDS */
+  .comp-card {
+    background: white;
+    border: 1px solid var(--color-gray-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+  }
+  .comp-card h4 {
+    font-family: var(--font-title);
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: var(--space-3);
+  }
+  .comp-card .demo { margin-bottom: var(--space-4); }
+
+  /* HEADER DEMO */
+  .demo-header {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-gray-border);
+    box-shadow: var(--shadow-sm);
+  }
+  .demo-header-top {
+    background: var(--color-primary);
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+    font-size: 13px;
+    color: white;
+  }
+  .demo-header-main {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .demo-logo {
+    width: 40px;
+    height: 40px;
+    background: var(--color-primary);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: white;
+    font-size: 18px;
+    font-family: var(--font-title);
+  }
+  .demo-nav {
+    display: flex;
+    gap: 24px;
+    margin-left: 24px;
+    flex: 1;
+  }
+  .demo-nav a {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-black);
+    text-decoration: none;
+  }
+  .demo-nav a:hover { color: var(--color-primary); }
+
+  /* HERO DEMO */
+  .demo-hero {
+    background: var(--color-primary);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .demo-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: var(--color-yellow);
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  .demo-hero h1 {
+    font-family: var(--font-title);
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .demo-hero h1 span { color: var(--color-yellow); }
+  .demo-hero p { font-size: var(--text-base); opacity: 0.9; margin-bottom: 24px; }
+  .demo-hero .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* CARD DEMO */
+  .demo-card {
+    background: var(--color-primary);
+    border-radius: var(--radius-md);
+    padding: 15px 10px 30px;
+    color: white;
+    text-align: center;
+  }
+  .demo-card-light {
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 15px 10px 30px;
+    border: 1px solid var(--color-gray-border);
+    text-align: center;
+  }
+  .demo-card-light h3 { color: var(--color-primary); }
+  .demo-card-violet {
+    background: var(--color-violet);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    color: white;
+    text-align: center;
+  }
+
+  /* NOTIFICATION STRIPS */
+  .notif-strip {
+    padding: 10px 24px;
+    font-size: var(--text-sm);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: var(--radius-md);
+    margin-bottom: 8px;
+  }
+  .notif-info    { background: var(--color-teal); color: white; }
+  .notif-warning { background: var(--color-primary); color: white; }
+  .notif-promo   { background: var(--color-yellow); color: var(--color-primary); font-weight: 700; }
+
+  /* INPUT DEMO */
+  .input-base {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #515151;
+    padding: 13px 16px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    font-family: var(--font-body);
+    color: var(--color-black);
+    outline: none;
+    transition: border-color .2s;
+  }
+  .input-base:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(150,21,74,.1); }
+  .input-base::placeholder { color: #595959; }
+
+  /* BADGE/TAG */
+  .badge-pill {
+    display: inline-block;
+    background: var(--color-primary);
+    color: white;
+    border-radius: var(--radius-pill);
+    padding: 6px 18px;
+    font-size: var(--text-sm);
+    font-weight: 700;
+  }
+  .badge-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-pill);
+    padding: 6px 18px;
+    font-size: var(--text-sm);
+    font-weight: 700;
+  }
+  .badge-teal {
+    display: inline-block;
+    background: var(--color-teal);
+    color: white;
+    border-radius: var(--radius-full);
+    padding: 4px 14px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  /* TESTIMONIAL CARD */
+  .demo-testimonial {
+    background: white;
+    border-radius: var(--radius-lg);
+    border: 1px solid #E9E9E9;
+    padding: 24px;
+  }
+  .demo-testimonial .author {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .demo-testimonial .avatar {
+    width: 44px; height: 44px;
+    background: var(--rose-400);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .demo-testimonial .author-name { font-family: var(--font-title); font-weight: 700; font-size: var(--text-base); color: var(--color-black); }
+  .demo-testimonial .author-role { font-size: var(--text-sm); color: var(--color-teal); }
+  .demo-testimonial p { font-size: var(--text-sm); color: var(--color-gray-text); line-height: 1.7; }
+
+  /* STICKY BAR DEMO */
+  .demo-sticky-bar {
+    background: var(--color-primary);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    color: white;
+  }
+
+  /* SPEC TABLE */
+  table.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    margin-top: var(--space-4);
+  }
+  table.spec-table th {
+    background: var(--color-primary);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 13px;
+  }
+  table.spec-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    vertical-align: top;
+  }
+  table.spec-table tr:nth-child(even) td { background: var(--color-gray-light); }
+  table.spec-table .label-col { font-family: var(--font-body); font-weight: 600; color: var(--color-black); font-size: 13px; }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--rose-50);
+    border-left: 4px solid var(--color-primary);
+    padding: var(--space-4) var(--space-5);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin: var(--space-4) 0;
+    font-size: var(--text-sm);
+  }
+  .callout strong { color: var(--color-primary); }
+
+  /* SHADOW DEMOS */
+  .shadow-demo {
+    background: white;
+    border-radius: var(--radius-lg);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-gray-text);
+  }
+
+  /* IMAGE ROUNDED */
+  .demo-img-frame {
+    background: var(--color-violet);
+    border-radius: 32px 0 20px 20px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 13px;
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+
+  /* STICKY NAV COMPACT */
+  .sticky-bar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #eee;
+    z-index: 90;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 44px;
+    overflow-x: auto;
+  }
+  .sticky-bar a {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-gray-text);
+    text-decoration: none;
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: all .2s;
+  }
+  .sticky-bar a:hover { background: var(--rose-50); color: var(--color-primary); }
+
+  .section-anchor { padding-top: 110px; margin-top: -110px; }
+</style>
+</head>
+<body>
+
+<!-- NAV PRINCIPALE -->
+<nav class="guide-nav">
+  <div class="logo">MR · Charte Graphique Dev</div>
+  <a href="#couleurs">Couleurs</a>
+  <a href="#typographie">Typo</a>
+  <a href="#boutons">Boutons</a>
+  <a href="#composants">Composants</a>
+  <a href="#espacement">Espacement</a>
+  <a href="#layout">Layout</a>
+  <a href="#variables">Variables CSS</a>
+</nav>
+
+<!-- STICKY SHORTCUT BAR -->
+<div class="sticky-bar">
+  <a href="#couleurs">🎨 Palette</a>
+  <a href="#typographie">Aa Typo</a>
+  <a href="#boutons">Boutons</a>
+  <a href="#header">Header</a>
+  <a href="#hero">Hero</a>
+  <a href="#cards">Cards</a>
+  <a href="#forms">Forms</a>
+  <a href="#badges">Badges</a>
+  <a href="#testimonials">Témoignages</a>
+  <a href="#notifications">Notifications</a>
+  <a href="#shadows">Ombres</a>
+  <a href="#radius">Radius</a>
+  <a href="#variables">Variables CSS</a>
+</div>
+
+<!-- HERO GUIDE -->
+<div class="guide-hero">
+  <div class="badge">Guide Développement Web</div>
+  <h1>Charte Graphique<br>Mondial Relay</h1>
+  <p>Référentiel complet de design system extrait du site mondialrelay.fr — Couleurs, typographie, composants, espacements et patterns UI.</p>
+</div>
+
+<!-- ================================================================
+     SECTION : COULEURS
+================================================================ -->
+<section class="section section-anchor" id="couleurs">
+  <div class="container">
+    <h2 class="section-title">Couleurs <span class="anchor-id">#couleurs</span></h2>
+    <p class="section-subtitle">Palette officielle extraite du site. Utiliser impérativement les variables CSS définies en fin de document.</p>
+
+    <h3 style="font-family:var(--font-title);font-size:18px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Couleurs primaires</h3>
+    <div class="color-grid" style="margin-bottom:40px;">
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#96154A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Rose Bordeaux (Primary)</div>
+          <div class="swatch-hex">#96154A — rgb(150,21,74)</div>
+          <div class="swatch-var">--color-primary</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#880D37;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary Dark</div>
+          <div class="swatch-hex">#880D37</div>
+          <div class="swatch-var">--color-primary-dark</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#FAF3F6;border:1px solid #eee;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Primary Light</div>
+          <div class="swatch-hex">#FAF3F6</div>
+          <div class="swatch-var">--color-primary-light</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--font-title);font-size:18px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Couleurs secondaires</h3>
+    <div class="color-grid" style="margin-bottom:40px;">
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#341661;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Violet Profond</div>
+          <div class="swatch-hex">#341661 — rgb(52,22,97)</div>
+          <div class="swatch-var">--color-violet</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#4DC1BE;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Turquoise / Teal</div>
+          <div class="swatch-hex">#4DC1BE — rgb(77,193,190)</div>
+          <div class="swatch-var">--color-teal</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#FBD000;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Jaune / Yellow</div>
+          <div class="swatch-hex">#FBD000 — rgb(251,208,0)</div>
+          <div class="swatch-var">--color-yellow</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#FF5C84;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Rose Vif / Pink</div>
+          <div class="swatch-hex">#FF5C84 — rgb(255,92,132)</div>
+          <div class="swatch-var">--color-pink</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--font-title);font-size:18px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Neutres &amp; gris</h3>
+    <div class="color-grid" style="margin-bottom:40px;">
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#F5F3F7;border:1px solid #eee;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray Light</div>
+          <div class="swatch-hex">#F5F3F7</div>
+          <div class="swatch-var">--color-gray-light</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#F6F6F4;border:1px solid #eee;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray Mid</div>
+          <div class="swatch-hex">#F6F6F4</div>
+          <div class="swatch-var">--color-gray-mid</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#DFDEDE;border:1px solid #eee;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Border Gray</div>
+          <div class="swatch-hex">#DFDEDE</div>
+          <div class="swatch-var">--color-gray-border</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#555555;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Gray Text</div>
+          <div class="swatch-hex">#555555</div>
+          <div class="swatch-var">--color-gray-text</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--font-title);font-size:18px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Échelle rose complète (Tailwind)</h3>
+    <div class="color-grid">
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#FFF1F2;border:1px solid #eee;"></div>
+        <div class="swatch-info"><div class="swatch-name">rose-50</div><div class="swatch-hex">#FFF1F2</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:rgba(246,171,182,0.4);border:1px solid #eee;"></div>
+        <div class="swatch-info"><div class="swatch-name">rose-200</div><div class="swatch-hex">rgba(246,171,182,.4)</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#FCCDD4;border:1px solid #eee;"></div>
+        <div class="swatch-info"><div class="swatch-name">rose-300</div><div class="swatch-hex">#FCCDD4</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#F6ABB6;"></div>
+        <div class="swatch-info"><div class="swatch-name">rose-400</div><div class="swatch-hex">#F6ABB6</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#96154A;"></div>
+        <div class="swatch-info"><div class="swatch-name">rose-500 (Primary)</div><div class="swatch-hex">#96154A</div></div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-color" style="background:#881337;"></div>
+        <div class="swatch-info"><div class="swatch-name">rose-900</div><div class="swatch-hex">#881337</div></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:32px;">
+      <strong>Règle d'usage :</strong> Le rose bordeaux <code>#96154A</code> est la couleur signature de la marque. Il s'applique sur tous les titres, CTA principaux, icônes et éléments d'accentuation. Le violet <code>#341661</code> est réservé aux sections B2B premium et au groupe InPost. Le jaune <code>#FBD000</code> est uniquement utilisé comme highlight de mots-clés dans les titres, jamais en fond de pleine page.
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION : TYPOGRAPHIE
+================================================================ -->
+<section class="section section--alt section-anchor" id="typographie">
+  <div class="container">
+    <h2 class="section-title">Typographie <span class="anchor-id">#typographie</span></h2>
+    <p class="section-subtitle">Deux polices distinctes selon le rôle : Saira Bold pour les titres, Archivo pour le corps.</p>
+
+    <div class="grid-2" style="margin-bottom:32px;">
+      <div class="comp-card">
+        <h4>Police Titres — Saira Bold</h4>
+        <div class="code-block" style="margin-bottom:16px;font-size:11px;padding:12px 16px;">
+          <span class="c-prop">font-family</span>: <span class="c-string">'Saira', sans-serif</span>;<br>
+          <span class="c-prop">font-weight</span>: <span class="c-value">700</span>;<br>
+          <span class="c-prop">import</span>: <span class="c-string">Google Fonts (Saira:700,800)</span>
+        </div>
+        <div style="font-family:'Saira',sans-serif;font-weight:700;color:var(--color-primary);">
+          <div style="font-size:40px;line-height:1.2;margin-bottom:4px;">Titre H1 — 40px</div>
+          <div style="font-size:35px;line-height:1.2;margin-bottom:4px;">Titre H2 — 35px</div>
+          <div style="font-size:23px;line-height:1.3;margin-bottom:4px;">Titre H3 — 23px</div>
+          <div style="font-size:20px;line-height:1.3;">Titre H4 — 20px</div>
+        </div>
+      </div>
+      <div class="comp-card">
+        <h4>Police Corps — Archivo</h4>
+        <div class="code-block" style="margin-bottom:16px;font-size:11px;padding:12px 16px;">
+          <span class="c-prop">font-family</span>: <span class="c-string">'Archivo', sans-serif</span>;<br>
+          <span class="c-prop">font-weight</span>: <span class="c-value">400 / 500 / 600 / 700</span>;<br>
+          <span class="c-prop">import</span>: <span class="c-string">Google Fonts (Archivo:400..700)</span>
+        </div>
+        <div style="font-family:'Archivo',sans-serif;">
+          <div style="font-weight:400;font-size:15px;margin-bottom:6px;">Texte courant — 15px Regular (400)</div>
+          <div style="font-weight:500;font-size:15px;margin-bottom:6px;">Navigation — 15px Medium (500)</div>
+          <div style="font-weight:600;font-size:15px;margin-bottom:6px;">Label / UI — 15px SemiBold (600)</div>
+          <div style="font-weight:700;font-size:15px;margin-bottom:6px;">Boutons / CTA — 15px Bold (700)</div>
+          <div style="font-weight:400;font-size:13px;margin-bottom:6px;">Texte secondaire — 13px Regular</div>
+          <div style="font-weight:400;font-size:11px;color:var(--color-gray-subtle);">Label / meta — 11px Regular</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--font-title);font-size:18px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Hiérarchie typographique complète</h3>
+
+    <div class="typo-sample">
+      <div class="typo-meta">
+        <span>H1</span><span>Saira Bold 700</span><span>40px</span><span>color: #96154A</span><span>line-height: normal</span>
+      </div>
+      <h1 style="font-family:var(--font-title);font-size:40px;font-weight:700;color:var(--color-primary);line-height:1.2;">Envoyez et recevez vos Colis</h1>
+    </div>
+
+    <div class="typo-sample">
+      <div class="typo-meta">
+        <span>H2</span><span>Saira Bold 700</span><span>35px</span><span>color: #96154A</span>
+      </div>
+      <h2 style="font-family:var(--font-title);font-size:35px;font-weight:700;color:var(--color-primary);">Profitez de tous nos services</h2>
+    </div>
+
+    <div class="typo-sample">
+      <div class="typo-meta">
+        <span>H3</span><span>Saira Bold 700</span><span>20px</span><span>color: #96154A</span>
+      </div>
+      <h3 style="font-family:var(--font-title);font-size:20px;font-weight:700;color:var(--color-primary);">Points Relais® et Lockers</h3>
+    </div>
+
+    <div class="typo-sample">
+      <div class="typo-meta">
+        <span>H4</span><span>Saira Bold 700</span><span>23px</span><span>color: #96154A</span>
+      </div>
+      <h4 style="font-family:var(--font-title);font-size:23px;font-weight:700;color:var(--color-primary);">Solutions E-commerçants</h4>
+    </div>
+
+    <div class="typo-sample">
+      <div class="typo-meta">
+        <span>Body</span><span>Archivo Regular 400</span><span>15px</span><span>color: #000</span><span>line-height: 1.6</span>
+      </div>
+      <p style="font-family:var(--font-body);font-size:15px;font-weight:400;color:#000;line-height:1.6;">Améliorez la rentabilité de votre entreprise et réduisez vos coûts d'expédition tout en améliorant la satisfaction de vos clients. Mondial Relay vous accompagne dans votre croissance.</p>
+    </div>
+
+    <div class="typo-sample">
+      <div class="typo-meta">
+        <span>Body Small</span><span>Archivo Regular 400</span><span>13px</span><span>color: #555</span>
+      </div>
+      <p style="font-family:var(--font-body);font-size:13px;font-weight:400;color:var(--color-gray-text);line-height:1.6;">Texte secondaire, descriptions de cartes, mentions légales et contenus d'aide. Toujours avec un contraste suffisant sur fond blanc ou clair.</p>
+    </div>
+
+    <div class="callout">
+      <strong>Import Google Fonts :</strong> <code>&lt;link href="https://fonts.googleapis.com/css2?family=Saira:wght@700;800&amp;family=Archivo:wght@400;500;600;700&amp;display=swap" rel="stylesheet"&gt;</code>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION : BOUTONS
+================================================================ -->
+<section class="section section-anchor" id="boutons">
+  <div class="container">
+    <h2 class="section-title">Boutons <span class="anchor-id">#boutons</span></h2>
+    <p class="section-subtitle">5 variants de boutons utilisés sur le site. Tous utilisent Archivo Bold 700.</p>
+
+    <table class="spec-table" style="margin-bottom:32px;">
+      <thead>
+        <tr><th>Variant</th><th>Usage</th><th>Styles CSS clés</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label-col">btn-primary</td>
+          <td>CTA principal — connexion, envoi</td>
+          <td>bg:#96154A / color:white / border:1px solid #96154A / radius:10px / padding:15px 22px / font:700 15px</td>
+        </tr>
+        <tr>
+          <td class="label-col">btn-outline</td>
+          <td>CTA secondaire — Solutions Pro, Créer un compte</td>
+          <td>bg:white / color:#96154A / border:2px solid #96154A / radius:10px / padding:15px 22px / font:700 15px</td>
+        </tr>
+        <tr>
+          <td class="label-col">btn-cta-hero</td>
+          <td>CTA hero bannière (grand format)</td>
+          <td>bg:white / color:#96154A / border:none / radius:50px / padding:18px 90px / font:700 25px</td>
+        </tr>
+        <tr>
+          <td class="label-col">btn-violet</td>
+          <td>CTA B2B / InPost (hero section violet)</td>
+          <td>bg:#341661 / color:white / radius:50px / padding:15px 30px / font:700 15px</td>
+        </tr>
+        <tr>
+          <td class="label-col">btn-sticky</td>
+          <td>Bouton sticky bar promotionnelle</td>
+          <td>bg:white / color:#96154A / border:2px solid #96154A / radius:10px / padding:8px 20px / font:700 13px</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="btn-showcase">
+      <button class="btn btn-primary">btn-primary</button>
+      <button class="btn btn-outline">btn-outline</button>
+      <button class="btn btn-cta-hero" style="font-size:16px;padding:14px 32px;">btn-cta-hero</button>
+      <button class="btn btn-violet">btn-violet</button>
+      <button class="btn btn-teal">btn-teal (info)</button>
+      <button class="btn btn-sticky">btn-sticky</button>
+    </div>
+
+    <div class="code-block">
+<span class="c-comment">/* Bouton primaire */</span>
+<span class="c-class">.btn-primary</span> {
+  <span class="c-prop">background</span>: <span class="c-value">var(--color-primary)</span>;       <span class="c-comment">/* #96154A */</span>
+  <span class="c-prop">color</span>: <span class="c-value">white</span>;
+  <span class="c-prop">border</span>: <span class="c-value">1px solid var(--color-primary)</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-value">var(--radius-md)</span>;           <span class="c-comment">/* 10px */</span>
+  <span class="c-prop">padding</span>: <span class="c-value">15px 22px</span>;
+  <span class="c-prop">font-family</span>: <span class="c-value">var(--font-body)</span>;
+  <span class="c-prop">font-size</span>: <span class="c-value">var(--text-base)</span>;              <span class="c-comment">/* 15px */</span>
+  <span class="c-prop">font-weight</span>: <span class="c-value">700</span>;
+}
+<span class="c-class">.btn-primary:hover</span> { <span class="c-prop">background</span>: <span class="c-value">var(--color-primary-dark)</span>; }
+
+<span class="c-comment">/* Bouton outline */</span>
+<span class="c-class">.btn-outline</span> {
+  <span class="c-prop">background</span>: <span class="c-value">white</span>;
+  <span class="c-prop">color</span>: <span class="c-value">var(--color-primary)</span>;
+  <span class="c-prop">border</span>: <span class="c-value">2px solid var(--color-primary)</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-value">var(--radius-md)</span>;
+  <span class="c-prop">padding</span>: <span class="c-value">15px 22px</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-value">700</span>;
+}
+
+<span class="c-comment">/* CTA Hero (grand bouton pill) */</span>
+<span class="c-class">.btn-cta-hero</span> {
+  <span class="c-prop">background</span>: <span class="c-value">white</span>;
+  <span class="c-prop">color</span>: <span class="c-value">var(--color-primary)</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-value">var(--radius-pill)</span>;          <span class="c-comment">/* 50px */</span>
+  <span class="c-prop">padding</span>: <span class="c-value">18px 90px</span>;
+  <span class="c-prop">font-size</span>: <span class="c-value">25px</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-value">700</span>;
+}
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION : COMPOSANTS
+================================================================ -->
+<section class="section section--alt section-anchor" id="composants">
+  <div class="container">
+    <h2 class="section-title">Composants UI <span class="anchor-id">#composants</span></h2>
+    <p class="section-subtitle">Démonstrations des composants principaux du site.</p>
+
+    <!-- HEADER -->
+    <div class="section-anchor" id="header" style="margin-bottom:8px;">
+      <h3 style="font-family:var(--font-title);font-size:20px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Header</h3>
+    </div>
+    <div class="demo-header" style="margin-bottom:32px;">
+      <div class="demo-header-top">
+        <span>🌐 France</span>
+        <span>Connexion</span>
+        <span>Mon panier (0,00 €)</span>
+      </div>
+      <div class="demo-header-main">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div class="demo-logo">r</div>
+          <div>
+            <div style="font-family:var(--font-title);font-size:14px;font-weight:700;color:var(--color-primary);">Mondial<br>Relay</div>
+          </div>
+        </div>
+        <div class="demo-nav">
+          <a href="#">Suivi de colis</a>
+          <a href="#">Envoi de colis</a>
+          <a href="#">Points Relais® et Lockers</a>
+          <a href="#">Aide</a>
+        </div>
+        <button class="btn btn-outline" style="font-size:13px;padding:10px 16px;">Solutions Pro</button>
+      </div>
+    </div>
+    <div class="code-block" style="margin-bottom:32px;font-size:12px;">
+<span class="c-comment">/* Header structure */</span>
+<span class="c-tag">header</span> {
+  <span class="c-prop">background</span>: <span class="c-value">white</span>;
+  <span class="c-prop">position</span>: <span class="c-value">sticky</span>;
+  <span class="c-prop">top</span>: <span class="c-value">0</span>;
+  <span class="c-prop">z-index</span>: <span class="c-value">100</span>;
+}
+<span class="c-comment">/* Barre supérieure bordeaux */</span>
+<span class="c-class">.header-top</span> {
+  <span class="c-prop">background</span>: <span class="c-value">var(--color-primary)</span>;
+  <span class="c-prop">padding</span>: <span class="c-value">8px 24px</span>;
+  <span class="c-prop">color</span>: <span class="c-value">white</span>;
+  <span class="c-prop">font-size</span>: <span class="c-value">13px</span>;
+  <span class="c-prop">display</span>: <span class="c-value">flex</span>;
+  <span class="c-prop">justify-content</span>: <span class="c-value">flex-end</span>;
+  <span class="c-prop">gap</span>: <span class="c-value">24px</span>;
+}
+<span class="c-comment">/* Nav links */</span>
+<span class="c-tag">nav a</span> {
+  <span class="c-prop">font-family</span>: <span class="c-value">var(--font-body)</span>;
+  <span class="c-prop">font-size</span>: <span class="c-value">15px</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-value">500</span>;
+  <span class="c-prop">color</span>: <span class="c-value">black</span>;
+  <span class="c-prop">text-decoration</span>: <span class="c-value">none</span>;
+}
+<span class="c-tag">nav a:hover</span> { <span class="c-prop">color</span>: <span class="c-value">var(--color-primary)</span>; }
+    </div>
+
+    <!-- HERO -->
+    <div class="section-anchor" id="hero" style="margin-bottom:8px;">
+      <h3 style="font-family:var(--font-title);font-size:20px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Section Hero / Bannière</h3>
+    </div>
+    <div class="demo-hero" style="margin-bottom:32px;">
+      <div style="max-width:560px;">
+        <h1>Découvrez nos solutions de livraison <span>dès 2,76 € HT*</span></h1>
+        <p>Améliorez la rentabilité de votre entreprise et réduisez vos coûts d'expédition.</p>
+        <div class="hero-btns">
+          <button class="btn btn-cta-hero" style="font-size:16px;padding:14px 32px;">Découvrir nos offres &rsaquo;</button>
+          <button class="btn" style="background:transparent;color:white;border-bottom:1px solid rgba(255,255,255,.6);border-radius:0;padding:8px 0;font-size:14px;">Déjà client ? Envoyez vos colis !</button>
+        </div>
+      </div>
+    </div>
+    <div class="code-block" style="margin-bottom:32px;font-size:12px;">
+<span class="c-comment">/* Hero Section */</span>
+<span class="c-class">.hero</span> {
+  <span class="c-prop">background</span>: <span class="c-value">var(--color-primary)</span>;
+  <span class="c-prop">color</span>: <span class="c-value">white</span>;
+  <span class="c-prop">padding</span>: <span class="c-value">48px 40px</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-value">var(--radius-lg)</span>;
+}
+<span class="c-class">.hero h1</span> {
+  <span class="c-prop">font-family</span>: <span class="c-value">var(--font-title)</span>;
+  <span class="c-prop">font-size</span>: <span class="c-value">40px</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-value">700</span>;
+  <span class="c-prop">line-height</span>: <span class="c-value">1.2</span>;
+  <span class="c-prop">margin-bottom</span>: <span class="c-value">16px</span>;
+}
+<span class="c-class">.hero h1 span</span> { <span class="c-prop">color</span>: <span class="c-value">var(--color-yellow)</span>; } <span class="c-comment">/* Highlight prix */</span>
+    </div>
+
+    <!-- CARDS -->
+    <div class="section-anchor" id="cards" style="margin-bottom:8px;">
+      <h3 style="font-family:var(--font-title);font-size:20px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Cards</h3>
+    </div>
+    <div class="grid-3" style="margin-bottom:16px;">
+      <div class="demo-card">
+        <div style="width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;margin:0 auto 12px;"></div>
+        <h3 style="font-family:var(--font-title);font-size:16px;font-weight:700;color:white;margin-bottom:8px;">Envoyer un colis</h3>
+        <p style="font-size:13px;opacity:.9;">Card primaire — fond bordeaux</p>
+      </div>
+      <div class="demo-card-light">
+        <div style="width:48px;height:48px;background:var(--rose-200);border-radius:50%;margin:0 auto 12px;"></div>
+        <h3 style="font-family:var(--font-title);font-size:16px;font-weight:700;margin-bottom:8px;">Suivre un colis</h3>
+        <p style="font-size:13px;color:var(--color-gray-text);">Card claire — fond blanc, border gris</p>
+      </div>
+      <div class="demo-card-violet">
+        <div style="width:48px;height:48px;background:rgba(255,255,255,.15);border-radius:50%;margin:0 auto 12px;"></div>
+        <h3 style="font-family:var(--font-title);font-size:16px;font-weight:700;margin-bottom:8px;">InPost Group</h3>
+        <p style="font-size:13px;opacity:.85;">Card violet — sections B2B premium</p>
+      </div>
+    </div>
+    <div class="code-block" style="margin-bottom:32px;font-size:12px;">
+<span class="c-comment">/* Card primaire (fond bordeaux) */</span>
+<span class="c-class">.cards-card</span> {
+  <span class="c-prop">background</span>: <span class="c-value">var(--color-primary)</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-value">var(--radius-md)</span>;          <span class="c-comment">/* 10px */</span>
+  <span class="c-prop">padding</span>: <span class="c-value">15px 10px 30px</span>;
+  <span class="c-prop">color</span>: <span class="c-value">white</span>;
+}
+<span class="c-comment">/* Card claire */</span>
+<span class="c-class">.cards-card--light</span> {
+  <span class="c-prop">background</span>: <span class="c-value">white</span>;
+  <span class="c-prop">border</span>: <span class="c-value">1px solid var(--color-gray-border)</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-value">var(--radius-md)</span>;
+}
+<span class="c-comment">/* Card violet InPost */</span>
+<span class="c-class">.cards-card--violet</span> {
+  <span class="c-prop">background</span>: <span class="c-value">var(--color-violet)</span>;             <span class="c-comment">/* #341661 */</span>
+  <span class="c-prop">border-radius</span>: <span class="c-value">var(--radius-lg)</span>;
+}
+    </div>
+
+    <!-- FORMULAIRES -->
+    <div class="section-anchor" id="forms" style="margin-bottom:8px;">
+      <h3 style="font-family:var(--font-title);font-size:20px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Formulaires / Inputs</h3>
+    </div>
+    <div class="comp-card" style="margin-bottom:32px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:600px;">
+        <div>
+          <label style="display:block;font-family:var(--font-body);font-size:13px;font-weight:600;margin-bottom:6px;color:var(--color-black);">Prénom</label>
+          <input class="input-base" type="text" placeholder="Votre prénom">
+        </div>
+        <div>
+          <label style="display:block;font-family:var(--font-body);font-size:13px;font-weight:600;margin-bottom:6px;color:var(--color-black);">Email</label>
+          <input class="input-base" type="email" placeholder="votre@email.com">
+        </div>
+        <div style="grid-column:1/-1;">
+          <input class="input-base" type="text" placeholder="Numéro de colis à suivre..." style="border-color:#96154A;">
+        </div>
+      </div>
+    </div>
+    <div class="code-block" style="margin-bottom:32px;font-size:12px;">
+<span class="c-class">.input-base</span> {
+  <span class="c-prop">width</span>: <span class="c-value">100%</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-value">8px</span>;
+  <span class="c-prop">border</span>: <span class="c-value">1px solid #515151</span>;
+  <span class="c-prop">padding</span>: <span class="c-value">13px 16px</span>;
+  <span class="c-prop">font-family</span>: <span class="c-value">var(--font-body)</span>;
+  <span class="c-prop">font-size</span>: <span class="c-value">16px</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-value">400</span>;
+  <span class="c-prop">line-height</span>: <span class="c-value">1.2</span>;
+  <span class="c-prop">color</span>: <span class="c-value">#000</span>;
+  <span class="c-prop">outline</span>: <span class="c-value">none</span>;
+}
+<span class="c-class">.input-base::placeholder</span> { <span class="c-prop">color</span>: <span class="c-value">#595959</span>; }
+<span class="c-class">.input-base:focus</span> {
+  <span class="c-prop">border-color</span>: <span class="c-value">var(--color-primary)</span>;
+  <span class="c-prop">box-shadow</span>: <span class="c-value">0 0 0 3px rgba(150,21,74,.1)</span>;
+}
+    </div>
+
+    <!-- BADGES -->
+    <div class="section-anchor" id="badges" style="margin-bottom:8px;">
+      <h3 style="font-family:var(--font-title);font-size:20px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Badges &amp; Tags</h3>
+    </div>
+    <div class="btn-showcase" style="margin-bottom:32px;">
+      <span class="badge-pill">Solutions Pro</span>
+      <span class="badge-outline">Point Relais®</span>
+      <span class="badge-teal">Disponible</span>
+      <span style="display:inline-block;background:var(--color-yellow);color:var(--color-primary);border-radius:var(--radius-pill);padding:6px 18px;font-size:13px;font-weight:700;">Nouveau</span>
+      <span style="display:inline-block;background:var(--rose-300);color:var(--color-primary);border-radius:var(--radius-pill);padding:6px 18px;font-size:13px;font-weight:700;">Promo</span>
+    </div>
+
+    <!-- TÉMOIGNAGES -->
+    <div class="section-anchor" id="testimonials" style="margin-bottom:8px;">
+      <h3 style="font-family:var(--font-title);font-size:20px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Card Témoignage</h3>
+    </div>
+    <div class="grid-3" style="margin-bottom:32px;">
+      <div class="demo-testimonial">
+        <div class="author">
+          <div class="avatar"></div>
+          <div>
+            <div class="author-name">Arnaud Deneuville</div>
+            <div class="author-role">Responsable transport @Motoblouz</div>
+          </div>
+        </div>
+        <p>On travaille avec Mondial Relay depuis 2011. Cette année on devrait dépasser les 400 000 colis.</p>
+      </div>
+      <div class="demo-testimonial">
+        <div class="author">
+          <div class="avatar" style="background:var(--color-teal);"></div>
+          <div>
+            <div class="author-name">Julie Dalla Valle</div>
+            <div class="author-role">E-commerce @La Boutique du Coiffeur</div>
+          </div>
+        </div>
+        <p>Laisser le choix à l'utilisateur, car les contraintes de livraison à domicile ne doivent plus être un frein à la conversion.</p>
+      </div>
+      <div class="demo-testimonial">
+        <div class="author">
+          <div class="avatar" style="background:var(--color-violet);"></div>
+          <div>
+            <div class="author-name">Mehdi Bejaoui</div>
+            <div class="author-role">Directeur opérations @Joone</div>
+          </div>
+        </div>
+        <p>Mondial Relay c'est un de nos partenaires historiques. Ils ont su nous accompagner dans notre croissance très rapide.</p>
+      </div>
+    </div>
+    <div class="code-block" style="margin-bottom:32px;font-size:12px;">
+<span class="c-class">.testimonial-card</span> {
+  <span class="c-prop">background</span>: <span class="c-value">white</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-value">var(--radius-lg)</span>;           <span class="c-comment">/* 12px */</span>
+  <span class="c-prop">border</span>: <span class="c-value">1px solid #E9E9E9</span>;
+  <span class="c-prop">padding</span>: <span class="c-value">24px</span>;
+}
+<span class="c-class">.testimonial-author-role</span> { <span class="c-prop">color</span>: <span class="c-value">var(--color-teal)</span>; }   <span class="c-comment">/* Rôle en vert-turquoise */</span>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div class="section-anchor" id="notifications" style="margin-bottom:8px;">
+      <h3 style="font-family:var(--font-title);font-size:20px;color:var(--color-black);margin-bottom:16px;font-weight:700;">Barres de notifications &amp; alertes</h3>
+    </div>
+    <div style="margin-bottom:32px;">
+      <div class="notif-strip notif-info">
+        <span>ℹ️</span>
+        <span style="font-weight:600;">Info :</span>
+        <span>Livraison disponible en 24h dans toute la France.</span>
+        <span style="margin-left:auto;cursor:pointer;">&times;</span>
+      </div>
+      <div class="notif-strip notif-warning">
+        <span>⚠️</span>
+        <span>En raison des intempéries, la livraison peut être impactée dans certains départements.</span>
+        <span style="margin-left:auto;display:flex;gap:8px;"><span>&lsaquo;</span><span>&rsaquo;</span></span>
+      </div>
+      <div class="notif-strip notif-promo" style="justify-content:center;gap:16px;">
+        <span>Économisez jusqu'à <strong>10%</strong> sur vos envois de colis</span>
+        <button class="btn btn-sticky" style="font-size:12px;padding:6px 16px;">Créez votre compte pro</button>
+      </div>
+    </div>
+    <div class="code-block" style="margin-bottom:32px;font-size:12px;">
+<span class="c-comment">/* Barre info (turquoise) */</span>
+<span class="c-class">.notif-info</span> { <span class="c-prop">background</span>: <span class="c-value">var(--color-teal)</span>; <span class="c-prop">color</span>: <span class="c-value">white</span>; }
+<span class="c-comment">/* Barre alerte (bordeaux) */</span>
+<span class="c-class">.notif-warning</span> { <span class="c-prop">background</span>: <span class="c-value">var(--color-primary)</span>; <span class="c-prop">color</span>: <span class="c-value">white</span>; }
+<span class="c-comment">/* Barre promo (jaune) */</span>
+<span class="c-class">.notif-promo</span> { <span class="c-prop">background</span>: <span class="c-value">var(--color-yellow)</span>; <span class="c-prop">color</span>: <span class="c-value">var(--color-primary)</span>; <span class="c-prop">font-weight</span>: <span class="c-value">700</span>; }
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION : OMBRES & RADIUS
+================================================================ -->
+<section class="section section-anchor" id="shadows">
+  <div class="container">
+    <h2 class="section-title">Ombres &amp; Border Radius <span class="anchor-id">#shadows</span></h2>
+
+    <div class="grid-2" style="gap:48px;">
+      <div>
+        <h3 style="font-family:var(--font-title);font-size:18px;font-weight:700;margin-bottom:20px;">Ombres (Box Shadows)</h3>
+        <div style="display:flex;flex-direction:column;gap:24px;">
+          <div>
+            <div class="shadow-demo" style="box-shadow:rgba(0,0,0,0.15) 0px 0px 30px 0px;">shadow-sm</div>
+            <div style="font-family:monospace;font-size:11px;color:var(--color-gray-subtle);margin-top:4px;">rgba(0,0,0,0.15) 0px 0px 30px 0px — cartes légères</div>
+          </div>
+          <div>
+            <div class="shadow-demo" style="box-shadow:rgba(0,0,0,0.15) 0px 0px 40px 0px;">shadow-md</div>
+            <div style="font-family:monospace;font-size:11px;color:var(--color-gray-subtle);margin-top:4px;">rgba(0,0,0,0.15) 0px 0px 40px 0px — modales, dropdowns</div>
+          </div>
+          <div>
+            <div class="shadow-demo" style="box-shadow:rgba(0,0,0,0.2) 0px 0px 18px 0px;">shadow-lg</div>
+            <div style="font-family:monospace;font-size:11px;color:var(--color-gray-subtle);margin-top:4px;">rgba(0,0,0,0.2) 0px 0px 18px 0px — éléments flottants</div>
+          </div>
+          <div>
+            <div class="shadow-demo" style="box-shadow:rgba(130,130,130,0.3) 0px 0px 10px 0px;">shadow-card</div>
+            <div style="font-family:monospace;font-size:11px;color:var(--color-gray-subtle);margin-top:4px;">rgba(130,130,130,0.3) 0px 0px 10px 0px — cards standard</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-anchor" id="radius">
+        <h3 style="font-family:var(--font-title);font-size:18px;font-weight:700;margin-bottom:20px;">Border Radius</h3>
+        <table class="spec-table">
+          <thead><tr><th>Variable</th><th>Valeur</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td class="label-col">--radius-sm</td><td>5px</td><td>Petits éléments, tags</td></tr>
+            <tr><td class="label-col">--radius-md</td><td>10px</td><td><strong>Standard composants</strong> — boutons, cards, inputs</td></tr>
+            <tr><td class="label-col">--radius-lg</td><td>12px</td><td>Cards larges, panneaux</td></tr>
+            <tr><td class="label-col">--radius-xl</td><td>20px</td><td>Sections, blocs visuels</td></tr>
+            <tr><td class="label-col">--radius-2xl</td><td>30px</td><td>Éléments proéminents</td></tr>
+            <tr><td class="label-col">--radius-pill</td><td>50px</td><td>CTA hero, badges pills</td></tr>
+            <tr><td class="label-col">--radius-full</td><td>9999px</td><td>Cercles, avatars</td></tr>
+            <tr><td class="label-col">Asym. image</td><td>32px 0 8px 8px</td><td>Framing photos B2B</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION : ESPACEMENT
+================================================================ -->
+<section class="section section--alt section-anchor" id="espacement">
+  <div class="container">
+    <h2 class="section-title">Espacement <span class="anchor-id">#espacement</span></h2>
+    <p class="section-subtitle">Système basé sur une unité de 4px, multiples de 8 pour les espacements majeurs.</p>
+
+    <table class="spec-table" style="max-width:700px;">
+      <thead><tr><th>Variable</th><th>Valeur</th><th>Usage typique</th></tr></thead>
+      <tbody>
+        <tr><td class="label-col">--space-1</td><td>4px</td><td>Micro-espaces, gaps icônes</td></tr>
+        <tr><td class="label-col">--space-2</td><td>8px</td><td>Padding interne compact</td></tr>
+        <tr><td class="label-col">--space-3</td><td>12px</td><td>Gap entre éléments inline</td></tr>
+        <tr><td class="label-col">--space-4</td><td>16px</td><td>Padding sections compactes, gaps grilles</td></tr>
+        <tr><td class="label-col">--space-5</td><td>20px</td><td>Marges standard composants</td></tr>
+        <tr><td class="label-col">--space-6</td><td>24px</td><td>Padding horizontal containers</td></tr>
+        <tr><td class="label-col">--space-8</td><td>32px</td><td>Séparation sections moyennes</td></tr>
+        <tr><td class="label-col">--space-10</td><td>40px</td><td>Padding cards sections grises</td></tr>
+        <tr><td class="label-col">--space-12</td><td>48px</td><td>Padding hero sections</td></tr>
+        <tr><td class="label-col">--space-14</td><td>56px</td><td>Padding inférieur sections cards</td></tr>
+        <tr><td class="label-col">Section page</td><td>64px (top/bottom)</td><td>Padding vertical sections principales</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION : LAYOUT
+================================================================ -->
+<section class="section section-anchor" id="layout">
+  <div class="container">
+    <h2 class="section-title">Layout &amp; Grille <span class="anchor-id">#layout</span></h2>
+
+    <div class="grid-2" style="margin-bottom:32px;">
+      <div class="comp-card">
+        <h4>Container</h4>
+        <table class="spec-table">
+          <tbody>
+            <tr><td class="label-col">Max-width</td><td>1200px</td></tr>
+            <tr><td class="label-col">Padding horizontal</td><td>24px (1rem)</td></tr>
+            <tr><td class="label-col">Centrage</td><td>margin: 0 auto</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="comp-card">
+        <h4>Points de rupture (Breakpoints)</h4>
+        <table class="spec-table">
+          <tbody>
+            <tr><td class="label-col">Mobile (xs)</td><td>&lt; 768px — 1 colonne</td></tr>
+            <tr><td class="label-col">Tablet (md)</td><td>768px — 2 colonnes</td></tr>
+            <tr><td class="label-col">Desktop (lg)</td><td>1024px — 3/4 colonnes</td></tr>
+            <tr><td class="label-col">Wide (xl)</td><td>1440px — layout complet</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--font-title);font-size:18px;font-weight:700;margin-bottom:16px;">Grilles standards observées</h3>
+    <div class="code-block" style="font-size:12px;">
+<span class="c-comment">/* 2 colonnes */</span>
+<span class="c-class">.grid-2</span> { <span class="c-prop">display</span>: <span class="c-value">grid</span>; <span class="c-prop">grid-template-columns</span>: <span class="c-value">1fr 1fr</span>; <span class="c-prop">gap</span>: <span class="c-value">24px</span>; }
+
+<span class="c-comment">/* 3 colonnes (cartes services) */</span>
+<span class="c-class">.grid-3</span> { <span class="c-prop">display</span>: <span class="c-value">grid</span>; <span class="c-prop">grid-template-columns</span>: <span class="c-value">repeat(3, 1fr)</span>; <span class="c-prop">gap</span>: <span class="c-value">24px</span>; }
+
+<span class="c-comment">/* 4 colonnes (stats InPost) */</span>
+<span class="c-class">.grid-4</span> { <span class="c-prop">display</span>: <span class="c-value">grid</span>; <span class="c-prop">grid-template-columns</span>: <span class="c-value">repeat(4, 1fr)</span>; <span class="c-prop">gap</span>: <span class="c-value">16px</span>; }
+
+<span class="c-comment">/* Responsive — mobile first */</span>
+@<span class="c-prop">media</span> (<span class="c-value">max-width: 768px</span>) {
+  <span class="c-class">.grid-2, .grid-3, .grid-4</span> { <span class="c-prop">grid-template-columns</span>: <span class="c-value">1fr</span>; }
+}
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     SECTION : VARIABLES CSS
+================================================================ -->
+<section class="section section--alt section-anchor" id="variables">
+  <div class="container">
+    <h2 class="section-title">Variables CSS — À copier <span class="anchor-id">#variables</span></h2>
+    <p class="section-subtitle">Bloc complet à intégrer dans votre fichier CSS global ou dans <code>:root</code>.</p>
+
+    <div class="code-block" style="font-size:12px;line-height:1.9;">
+<span class="c-comment">/* ================================================================
+   CHARTE GRAPHIQUE MONDIAL RELAY — Variables CSS
+   Source : mondialrelay.fr
+   Typo : Saira Bold (titres) + Archivo (corps)
+================================================================ */</span>
+
+<span class="c-class">:root</span> {
+  <span class="c-comment">/* === COULEURS PRIMAIRES === */</span>
+  <span class="c-prop">--color-primary</span>:          <span class="c-value">#96154A</span>;     <span class="c-comment">/* Rose bordeaux — couleur signature */</span>
+  <span class="c-prop">--color-primary-dark</span>:     <span class="c-value">#880D37</span>;     <span class="c-comment">/* Hover états primaires */</span>
+  <span class="c-prop">--color-primary-light</span>:    <span class="c-value">#FAF3F6</span>;     <span class="c-comment">/* Background léger sections */</span>
+
+  <span class="c-comment">/* === COULEURS SECONDAIRES === */</span>
+  <span class="c-prop">--color-violet</span>:           <span class="c-value">#341661</span>;     <span class="c-comment">/* Violet — hero B2B, premium */</span>
+  <span class="c-prop">--color-teal</span>:             <span class="c-value">#4DC1BE</span>;     <span class="c-comment">/* Turquoise — accents info */</span>
+  <span class="c-prop">--color-yellow</span>:           <span class="c-value">#FBD000</span>;     <span class="c-comment">/* Jaune — highlights titres uniquement */</span>
+  <span class="c-prop">--color-pink</span>:             <span class="c-value">#FF5C84</span>;     <span class="c-comment">/* Rose vif — badges, liens secondaires */</span>
+
+  <span class="c-comment">/* === NEUTRES === */</span>
+  <span class="c-prop">--color-white</span>:            <span class="c-value">#FFFFFF</span>;
+  <span class="c-prop">--color-black</span>:            <span class="c-value">#000000</span>;
+  <span class="c-prop">--color-gray-light</span>:       <span class="c-value">#F5F3F7</span>;     <span class="c-comment">/* Sections alternées */</span>
+  <span class="c-prop">--color-gray-mid</span>:         <span class="c-value">#F6F6F4</span>;     <span class="c-comment">/* Backgrounds neutres */</span>
+  <span class="c-prop">--color-gray-border</span>:      <span class="c-value">#DFDEDE</span>;     <span class="c-comment">/* Bordures cards claires */</span>
+  <span class="c-prop">--color-gray-text</span>:        <span class="c-value">#555555</span>;     <span class="c-comment">/* Texte secondaire */</span>
+  <span class="c-prop">--color-gray-subtle</span>:      <span class="c-value">#868686</span>;     <span class="c-comment">/* Labels, meta */</span>
+
+  <span class="c-comment">/* === PALETTE ROSE COMPLÈTE === */</span>
+  <span class="c-prop">--rose-50</span>:   <span class="c-value">#FFF1F2</span>;
+  <span class="c-prop">--rose-200</span>:  <span class="c-value">rgba(246,171,182,0.4)</span>;
+  <span class="c-prop">--rose-300</span>:  <span class="c-value">#FCCDD4</span>;
+  <span class="c-prop">--rose-400</span>:  <span class="c-value">#F6ABB6</span>;
+  <span class="c-prop">--rose-500</span>:  <span class="c-value">#96154A</span>;   <span class="c-comment">/* = --color-primary */</span>
+  <span class="c-prop">--rose-900</span>:  <span class="c-value">#881337</span>;
+
+  <span class="c-comment">/* === TYPOGRAPHIE === */</span>
+  <span class="c-prop">--font-title</span>: <span class="c-value">'Saira', sans-serif</span>;    <span class="c-comment">/* H1-H4 — Bold 700 */</span>
+  <span class="c-prop">--font-body</span>:  <span class="c-value">'Archivo', sans-serif</span>;  <span class="c-comment">/* Corps, UI, nav */</span>
+
+  <span class="c-comment">/* === FONT SIZES === */</span>
+  <span class="c-prop">--text-xs</span>:   <span class="c-value">11px</span>;
+  <span class="c-prop">--text-sm</span>:   <span class="c-value">13px</span>;
+  <span class="c-prop">--text-base</span>: <span class="c-value">15px</span>;  <span class="c-comment">/* Taille standard */</span>
+  <span class="c-prop">--text-md</span>:   <span class="c-value">17px</span>;
+  <span class="c-prop">--text-lg</span>:   <span class="c-value">20px</span>;
+  <span class="c-prop">--text-xl</span>:   <span class="c-value">23px</span>;
+  <span class="c-prop">--text-2xl</span>:  <span class="c-value">25px</span>;
+  <span class="c-prop">--text-3xl</span>:  <span class="c-value">35px</span>;
+  <span class="c-prop">--text-4xl</span>:  <span class="c-value">40px</span>;
+
+  <span class="c-comment">/* === SPACING (base 8px) === */</span>
+  <span class="c-prop">--space-1</span>:  <span class="c-value">4px</span>;
+  <span class="c-prop">--space-2</span>:  <span class="c-value">8px</span>;
+  <span class="c-prop">--space-3</span>:  <span class="c-value">12px</span>;
+  <span class="c-prop">--space-4</span>:  <span class="c-value">16px</span>;
+  <span class="c-prop">--space-5</span>:  <span class="c-value">20px</span>;
+  <span class="c-prop">--space-6</span>:  <span class="c-value">24px</span>;
+  <span class="c-prop">--space-8</span>:  <span class="c-value">32px</span>;
+  <span class="c-prop">--space-10</span>: <span class="c-value">40px</span>;
+  <span class="c-prop">--space-12</span>: <span class="c-value">48px</span>;
+  <span class="c-prop">--space-14</span>: <span class="c-value">56px</span>;
+
+  <span class="c-comment">/* === BORDER RADIUS === */</span>
+  <span class="c-prop">--radius-sm</span>:   <span class="c-value">5px</span>;
+  <span class="c-prop">--radius-md</span>:   <span class="c-value">10px</span>;   <span class="c-comment">/* Standard boutons/cards */</span>
+  <span class="c-prop">--radius-lg</span>:   <span class="c-value">12px</span>;   <span class="c-comment">/* Cards larges */</span>
+  <span class="c-prop">--radius-xl</span>:   <span class="c-value">20px</span>;
+  <span class="c-prop">--radius-2xl</span>:  <span class="c-value">30px</span>;
+  <span class="c-prop">--radius-pill</span>: <span class="c-value">50px</span>;   <span class="c-comment">/* CTA hero, badges pills */</span>
+  <span class="c-prop">--radius-full</span>: <span class="c-value">9999px</span>; <span class="c-comment">/* Cercles */</span>
+
+  <span class="c-comment">/* === SHADOWS === */</span>
+  <span class="c-prop">--shadow-sm</span>:   <span class="c-value">rgba(0,0,0,0.15) 0px 0px 30px 0px</span>;
+  <span class="c-prop">--shadow-md</span>:   <span class="c-value">rgba(0,0,0,0.15) 0px 0px 40px 0px</span>;
+  <span class="c-prop">--shadow-lg</span>:   <span class="c-value">rgba(0,0,0,0.2) 0px 0px 18px 0px</span>;
+  <span class="c-prop">--shadow-card</span>: <span class="c-value">rgba(130,130,130,0.3) 0px 0px 10px 0px</span>;
+
+  <span class="c-comment">/* === LAYOUT === */</span>
+  <span class="c-prop">--container-max</span>: <span class="c-value">1200px</span>;
+  <span class="c-prop">--header-height</span>: <span class="c-value">90px</span>;
+}
+
+<span class="c-comment">/* === BASE TYPOGRAPHIQUE === */</span>
+<span class="c-tag">body</span> {
+  <span class="c-prop">font-family</span>: <span class="c-value">var(--font-body)</span>;
+  <span class="c-prop">font-size</span>: <span class="c-value">var(--text-base)</span>;
+  <span class="c-prop">color</span>: <span class="c-value">var(--color-black)</span>;
+  <span class="c-prop">line-height</span>: <span class="c-value">1.6</span>;
+  <span class="c-prop">-webkit-font-smoothing</span>: <span class="c-value">antialiased</span>;
+}
+
+<span class="c-tag">h1</span> { <span class="c-prop">font-family</span>: <span class="c-value">var(--font-title)</span>; <span class="c-prop">font-size</span>: <span class="c-value">var(--text-4xl)</span>; <span class="c-prop">font-weight</span>: <span class="c-value">700</span>; <span class="c-prop">color</span>: <span class="c-value">var(--color-primary)</span>; }
+<span class="c-tag">h2</span> { <span class="c-prop">font-family</span>: <span class="c-value">var(--font-title)</span>; <span class="c-prop">font-size</span>: <span class="c-value">var(--text-3xl)</span>; <span class="c-prop">font-weight</span>: <span class="c-value">700</span>; <span class="c-prop">color</span>: <span class="c-value">var(--color-primary)</span>; }
+<span class="c-tag">h3</span> { <span class="c-prop">font-family</span>: <span class="c-value">var(--font-title)</span>; <span class="c-prop">font-size</span>: <span class="c-value">var(--text-lg)</span>;  <span class="c-prop">font-weight</span>: <span class="c-value">700</span>; <span class="c-prop">color</span>: <span class="c-value">var(--color-primary)</span>; }
+<span class="c-tag">h4</span> { <span class="c-prop">font-family</span>: <span class="c-value">var(--font-title)</span>; <span class="c-prop">font-size</span>: <span class="c-value">var(--text-xl)</span>;  <span class="c-prop">font-weight</span>: <span class="c-value">700</span>; <span class="c-prop">color</span>: <span class="c-value">var(--color-primary)</span>; }
+
+<span class="c-comment">/* Import fonts (à mettre dans &lt;head&gt;) */</span>
+<span class="c-comment">/* &lt;link href="https://fonts.googleapis.com/css2?family=Saira:wght@700;800&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet"&gt; */</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--color-primary);color:white;padding:32px 24px;text-align:center;">
+  <p style="font-family:var(--font-title);font-size:20px;font-weight:700;margin-bottom:8px;">Mondial Relay — Design System</p>
+  <p style="font-size:13px;opacity:.75;">Extrait via analyse directe du site mondialrelay.fr · Typo mise à jour : Saira Bold (titres) + Archivo (corps)</p>
+</footer>
+
+</body>
+</html>
